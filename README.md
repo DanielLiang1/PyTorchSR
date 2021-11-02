@@ -8,7 +8,7 @@ If you're new to PyTorch, first read [Deep Learning with PyTorch: A 60 Minute Bl
 
 Questions, suggestions, or corrections can be posted as issues.
 
-I'm using `PyTorch 1.4` in `Python 3.6`.
+I'm using `PyTorch 1.7` in `Python 3.9`.
 
 ---
 
@@ -17,6 +17,8 @@ I'm using `PyTorch 1.4` in `Python 3.6`.
 ---
 
 # Contents
+
+ResNet, GAN, CNN
 
 [***Objective***](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Super-Resolution#objective)
 

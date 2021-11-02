@@ -7,7 +7,7 @@ from datasets import SRDataset
 from utils import *
 
 # Data parameters
-data_folder = './'  # folder with JSON data files
+data_folder = './data/'   # folder with JSON data files
 crop_size = 96  # crop size of target HR images
 scaling_factor = 4  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
 

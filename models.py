@@ -252,10 +252,10 @@ class Discriminator(nn.Module):
         # The first convolutional block is unique because it does not employ batch normalization
         conv_blocks = list()
         for i in range(n_blocks):
-            out_channels = (n_channels if i is 0 else in_channels * 2) if i % 2 is 0 else in_channels
+            out_channels = (n_channels if i == 0 else in_channels * 2) if i % 2 == 0 else in_channels
             conv_blocks.append(
                 ConvolutionalBlock(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size,
-                                   stride=1 if i % 2 is 0 else 2, batch_norm=i is not 0, activation='LeakyReLu'))
+                                   stride=1 if i % 2 == 0 else 2, batch_norm=i is not 0, activation='LeakyReLu'))
             in_channels = out_channels
         self.conv_blocks = nn.Sequential(*conv_blocks)
 
@@ -340,3 +340,18 @@ class TruncatedVGG19(nn.Module):
         output = self.truncated_vgg19(input)  # (N, feature_map_channels, feature_map_w, feature_map_h)
 
         return output
+
+
+class SRCNN(nn.Module):
+    def __init__(self, num_channels=1):
+        super(SRCNN, self).__init__()
+        self.conv1 = nn.Conv2d(num_channels, 64, kernel_size=9, padding=9 // 2)
+        self.conv2 = nn.Conv2d(64, 32, kernel_size=5, padding=5 // 2)
+        self.conv3 = nn.Conv2d(32, num_channels, kernel_size=5, padding=5 // 2)
+        self.relu = nn.ReLU(inplace=True)
+
+    def forward(self, x):
+        x = self.relu(self.conv1(x))
+        x = self.relu(self.conv2(x))
+        x = self.conv3(x)
+        return x

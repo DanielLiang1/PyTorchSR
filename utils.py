@@ -27,10 +27,16 @@ def create_data_lists(train_folders, test_folders, min_size, output_folder):
     """
     print("\nCreating data lists... this may take some time.\n")
     train_images = list()
+    count = 0
+
     for d in train_folders:
         for i in os.listdir(d):
             img_path = os.path.join(d, i)
             img = Image.open(img_path, mode='r')
+            count = count + 1
+            if count % 1000 == 0:
+                print("i [{}/{}]: {}\n".format(count, len(os.listdir(d)), i))
+
             if img.width >= min_size and img.height >= min_size:
                 train_images.append(img_path)
     print("There are %d images in the training data.\n" % len(train_images))
